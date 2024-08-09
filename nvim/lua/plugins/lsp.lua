@@ -2,13 +2,12 @@ local lsp = {
 	"neovim/nvim-lspconfig",
 	dependencies = {
 		-- Automatically install LSPs and related tools to stdpath for Neovim
-		"williamboman/mason.nvim",
+		{ "williamboman/mason.nvim", opts = nil },
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		-- Useful status updates for LSP.
 		-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 		{ "j-hui/fidget.nvim", opts = {} },
-
 		-- Configures Lua LSP for your Neovim config, runtime and plugins
 		-- used for completion, annotations and signatures of Neovim apis
 		{
@@ -35,12 +34,8 @@ local lsp = {
 		},
 	},
 	config = function()
-		--  This function gets run when an LSP attaches to a particular buffer.
-		--    That is to say, every time a new file is opened that is associated with
-		--    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-		--    function will be executed to configure the current buffer
 		vim.api.nvim_create_autocmd("LspAttach", {
-			group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+			group = vim.api.nvim_create_augroup("kickstart.lsp", { clear = true }),
 			callback = function(event)
 				-- In this case, we create a function that lets us more easily define mappings specific
 				-- for LSP related items. It sets the mode, buffer and description for us each time.
@@ -79,7 +74,7 @@ local lsp = {
 
 				-- Execute a code action, usually your cursor needs to be on top of an error
 				-- or a suggestion from your LSP for this to activate.
-				map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+				map("<leader>a", vim.lsp.buf.code_action, "Code [A]ction")
 
 				-- Opens a popup that displays documentation about the word under your cursor
 				--  See `:help K` for why this keymap.
@@ -94,7 +89,36 @@ local lsp = {
 				--    See `:help CursorHold` for information about when this is executed
 				--
 				-- When you move your cursor, the highlights will be cleared (the second autocommand).
+
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
+				if client then
+					local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
+					for type, icon in pairs(signs) do
+						local hl = "DiagnosticSign" .. type
+						local hu = "DiagnosticUnderline" .. type
+						vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+					end
+					-- help :highlight, syntax [[ _vim script_ ]]
+					vim.cmd([[
+						hi DiagnosticUnderlineError guisp='Red' gui=underline
+						hi DiagnosticUnderlineWarn gui=NONE
+						hi DiagnosticUnderlineHint gui=NONE
+						hi DiagnosticUnderlineInfo gui=NONE
+						set termguicolors
+					]])
+
+					vim.diagnostic.config(
+						{ float = true, underline = true, virtual_text = false, signs },
+						vim.lsp.diagnostic.get_namespace(client.id)
+					)
+
+					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+						group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
+						callback = function()
+							vim.diagnostic.open_float(nil, { focus = false })
+						end,
+					})
+				end
 				if client and client.server_capabilities.documentHighlightProvider then
 					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 						buffer = event.buf,
@@ -142,15 +166,22 @@ local lsp = {
 						completion = {
 							callSnippet = "Replace",
 						},
-						      format = {
+						workspace = {
+							library = {
+								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+								[vim.fn.stdpath("config") .. "/lua"] = true,
+								[require("lazy.core.config").options.root .. "/"] = true,
+							},
+						},
+						format = {
 							enable = true,
 							-- Put format options here
 							-- NOTE: the value should be STRING!!
 							defaultConfig = {
-							  indent_style = "tab",
-							  indent_size = "4",
+								indent_style = "tab",
+								indent_size = "4",
 							},
-						      },
+						},
 						-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
 						-- diagnostics = { disable = { 'missing-fields' } },
 					},
@@ -158,16 +189,7 @@ local lsp = {
 			},
 		}
 
-		-- Ensure the servers and tools above are installed
-		--  To check the current status of installed tools and/or manually install
-		--  other tools, you can run
-		--    :Mason
-		--
-		--  You can press `g?` for help in this menu.
 		require("mason").setup()
-
-		-- You can add other tools here that you want Mason to install
-		-- for you, so that they are available from within Neovim.
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, { "stylua" })
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
