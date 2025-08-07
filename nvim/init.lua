@@ -65,6 +65,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+vim.lsp.enable("lua-ls")
+vim.lsp.enable("gopls")
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"

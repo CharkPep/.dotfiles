@@ -1,5 +1,8 @@
--- Autosave on leave from insert to normal, or changes in normal mode
-vim.api.nvim_create_autocmd({ "InsertLeave", "CursorHoldI" }, {
+-- There are generally three cases when one want to flush the buffer:
+-- 1) Exiting neovim.
+-- 2) Existing from the <Insert> mode.
+-- 3) In normal mode after pasting or deleting buffer content (BufModifiedSet cover more cases, but the only one that can be used for that perpose).
+vim.api.nvim_create_autocmd({ "VimLeave", "InsertLeave", "BufModifiedSet" }, {
 	desc = "Autosave on leave",
 	pattern = "*",
 	callback = function()
