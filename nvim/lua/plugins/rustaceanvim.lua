@@ -1,11 +1,12 @@
-local rustaceanvim = {}
-require("config.rustacceanvim")
-rustaceanvim ={
-	'mrcjkb/rustaceanvim',
-	version = '^4', -- Recommended
+local rustaceanvim = {
+	"mrcjkb/rustaceanvim",
+	version = "5^",
 	lazy = false, -- This plugin is already lazy
-	config = function () end,
+	init = function()
+		-- Load configuration beforce calling init
+		require("config.rustacceanvim")
+	end,
+	config = function() end,
 }
 
--- TODO hook to save event
 return rustaceanvim

@@ -1,6 +1,6 @@
 local flavor = "mocha"
 function vim.g:set_flavor(new_flavor)
-	flavor=new_flavor
+	flavor = new_flavor
 end
 
 local catppuccin = {

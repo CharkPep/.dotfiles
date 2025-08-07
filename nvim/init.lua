@@ -99,5 +99,14 @@ require("lazy").setup({
 	ui = {},
 })
 
+local function set_filetype(pattern, filetype)
+	vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+		pattern = pattern,
+		command = "set filetype=" .. filetype,
+	})
+end
+
+set_filetype({ "docker-compose.yml" }, "yaml.docker-compose")
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

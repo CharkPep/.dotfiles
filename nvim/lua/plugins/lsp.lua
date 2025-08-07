@@ -1,3 +1,4 @@
+-- @type
 local lsp = {
 	"neovim/nvim-lspconfig",
 	dependencies = {
@@ -37,8 +38,6 @@ local lsp = {
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("kickstart.lsp", { clear = true }),
 			callback = function(event)
-				-- In this case, we create a function that lets us more easily define mappings specific
-				-- for LSP related items. It sets the mode, buffer and description for us each time.
 				local map = function(keys, func, desc)
 					vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 				end
@@ -74,7 +73,7 @@ local lsp = {
 
 				-- Execute a code action, usually your cursor needs to be on top of an error
 				-- or a suggestion from your LSP for this to activate.
-				map("<leader>a", vim.lsp.buf.code_action, "Code [A]ction")
+				map("<leader>a", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
 				-- Opens a popup that displays documentation about the word under your cursor
 				--  See `:help K` for why this keymap.
@@ -157,14 +156,17 @@ local lsp = {
 					},
 				},
 			},
+			clangd = {
+				filetypes = { "c", "cpp" },
+			},
 			lua_ls = {
-				-- cmd = {...},
-				-- filetypes = { ...},
-				-- capabilities = {},
 				settings = {
 					Lua = {
 						completion = {
 							callSnippet = "Replace",
+						},
+						diagnostics = {
+							globals = { "vim" },
 						},
 						workspace = {
 							library = {

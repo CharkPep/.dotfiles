@@ -1,48 +1,60 @@
-local is_tree_open = false
 local neotree = {
-	"nvim-neo-tree/neo-tree.nvim",
-	branch = "v3.x",
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		-- "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-		"MunifTanjim/nui.nvim",
-		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-	},
+	-- "nvim-neo-tree/neo-tree.nvim",
+	-- branch = "v3.x",
+	-- opts = {
+	-- 	sync_root_with_cwd = true,
+	-- 	respect_buf_cwd = true,
+	-- 	update_focused_file = {
+	-- 		enable = true,
+	-- 		update_root = true,
+	-- 	},
+	-- 	close_if_last_window = true,
+	-- 	filesystem = {
+	-- 		filtered_items = {
+	-- 			visible = true,
+	-- 			hide_dotfiles = false,
+	-- 			hide_gitignored = false,
+	-- 			hide_by_name = {
+	-- 				".github",
+	-- 				".gitignore",
+	-- 				"package-lock.json",
+	-- 			},
+	-- 			never_show = { ".git" },
+	-- 		},
+	-- 	},
+	-- },
+	-- dependencies = {
+	-- 	"nvim-lua/plenary.nvim",
+	-- 	"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+	-- 	"MunifTanjim/nui.nvim",
+	-- 	"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+	-- },
 }
 
-vim.keymap.set("n", "<C-e>", function()
-	if is_tree_open then
-		is_tree_open = false
-		require("neo-tree.command").execute({
-			action = "close",
-		})
-		return
-	end
-
-	local full_path = vim.fn.expand("%:p")
-	print(full_path)
-	if full_path == "" then
-		full_path = vim.fn.getcwd()
-	else
-		local f = io.open(full_path, "r")
-		if f then
-			f.close(f)
-		else
-			full_path = vim.fn.getcwd()
-		end
-	end
-	is_tree_open = true
-	require("neo-tree.command").execute({
-		action = "focus", -- OPTIONAL, this is the default value
-		source = "filesystem", -- OPTIONAL, this is the default value
-		position = "right", -- OPTIONAL, this is the default value
-		reveal_file = full_path, -- path to file or folder to reveal
-		reveal_force_cwd = true, -- change cwd without asking if needed
-	})
-end, { desc = "Open neo-tree at current file or working directory", noremap = true })
-
--- vim.neo_tree.is_tree_open = function()
--- 	return is_tree_open
--- end
+-- vim.keymap.set("n", "<C-e>", function()
+-- 	if is_tree_open then
+-- 		is_tree_open = false
+-- 		require("neo-tree.command").execute({
+-- 			action = "close",
+-- 		})
+--
+-- 		return
+-- 	end
+--
+-- 	full_path = vim.fn.getcwd()
+-- 	-- under_proj = is_path_contained_under(full_path, PROJ_DIR)
+-- 	if not under_proj then
+-- 		full_path = vim.fn.getcwd()
+-- 	end
+--
+-- 	is_tree_open = true
+-- 	require("neo-tree.command").execute({
+-- 		action = "focus",
+-- 		source = "filesystem",
+-- 		position = "right",
+-- 		reveal_file = full_path, -- path to file or folder to reveal
+-- 		reveal_force_cwd = true, -- change cwd without asking if needed
+-- 	})
+-- end, { desc = "Open neo-tree at nvim process start directory", noremap = true })
 
 return neotree
