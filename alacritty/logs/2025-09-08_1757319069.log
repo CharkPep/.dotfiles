@@ -1,0 +1,6 @@
+2025-09-08: Starting tmux in a new session
+pci id for fd 22: 10de:25a2, driver (null)
+pci id for fd 23: 10de:25a2, driver (null)
+Terminated                 alacritty -e tmux new -s 2025-09-08_1757319069
+2025-09-09: Error: exited with non-zero status
+2025-09-09: Closing terminal

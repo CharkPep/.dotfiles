@@ -1,0 +1,7 @@
+2024-12-06: Starting tmux in a new session
+thread 'main' panicked at /build/.cargo/registry/src/index.crates.io-6f17d22bba15001f/winit-0.30.4/src/platform_impl/linux/x11/mod.rs:962:14:
+Failed to update device event filter: Connection(IoError(Custom { kind: Other, error: UnknownError }))
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+X connection to :1 broken (explicit kill or server shutdown).
+2024-12-06: Error: exited with non-zero status
+2024-12-06: Closing terminal

@@ -1,0 +1,7 @@
+2025-03-17: Starting tmux in a new session
+Io error: Broken pipe (os error 32)
+Io error: Connection reset by peer (os error 104)
+Io error: Connection reset by peer (os error 104)
+Error: ExitFailure(1)
+2025-03-17: Error: exited with non-zero status
+2025-03-17: Closing terminal

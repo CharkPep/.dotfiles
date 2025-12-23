@@ -1,0 +1,9 @@
+2025-08-28: Starting tmux in a new session
+pci id for fd 22: 10de:25a2, driver (null)
+kmsro: driver missing
+Io error: Connection reset by peer (os error 104)
+Io error: Connection reset by peer (os error 104)
+Io error: Connection reset by peer (os error 104)
+Error: ExitFailure(1)
+2025-08-28: Error: exited with non-zero status
+2025-08-28: Closing terminal

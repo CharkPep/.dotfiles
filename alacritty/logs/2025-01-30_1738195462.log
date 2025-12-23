@@ -1,0 +1,8 @@
+2025-01-30: Starting tmux in a new session
+Io error: Broken pipe (os error 32)
+Error trying to flush the wayland display: Broken pipe (os error 32)
+Io error: Broken pipe (os error 32)
+Error trying to flush the wayland display: Broken pipe (os error 32)
+Error: ExitFailure(1)
+2025-01-31: Error: exited with non-zero status
+2025-01-31: Closing terminal

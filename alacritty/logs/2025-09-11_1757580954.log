@@ -1,0 +1,9 @@
+2025-09-11: Starting tmux in a new session
+pci id for fd 22: 10de:25a2, driver (null)
+pci id for fd 23: 10de:25a2, driver (null)
+Io error: Broken pipe (os error 32)
+Io error: Broken pipe (os error 32)
+Io error: Broken pipe (os error 32)
+Error: ExitFailure(1)
+2025-09-11: Error: exited with non-zero status
+2025-09-11: Closing terminal

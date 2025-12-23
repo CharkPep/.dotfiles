@@ -1,0 +1,9 @@
+2025-09-21: Starting tmux in a new session
+pci id for fd 22: 10de:25a2, driver (null)
+pci id for fd 23: 10de:25a2, driver (null)
+Io error: Connection reset by peer (os error 104)
+Io error: Connection reset by peer (os error 104)
+Io error: Connection reset by peer (os error 104)
+Error: ExitFailure(1)
+2025-09-27: Error: exited with non-zero status
+2025-09-27: Closing terminal

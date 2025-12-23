@@ -1,0 +1,45 @@
+
+[window]
+padding = { x = 3, y = 3 }
+dynamic_padding =false
+title="Console | Alacritty"
+decorations="Full"
+startup_mode="Maximized"
+
+# Can not be used with GNOME
+# opacity = 0.9
+
+[font.bold]
+family = "JetBrains Mono"
+style = "Bold"
+
+[env]
+TERM = "alacritty"
+
+[font.italic]
+family = "JetBrains Mono"
+style = "Italic"
+
+[font.normal]
+family = "JetBrains Mono"
+style = "Regular"
+
+[general]
+
+live_config_reload = true
+# General
+import = [
+    "~/.config/alacritty/themes/themes/catppuccin.toml"
+]
+
+
+[[keyboard.bindings]]
+key="q"
+mods="Control"
+action="Quit"
+
+
+[font]
+size=12.0
+
+

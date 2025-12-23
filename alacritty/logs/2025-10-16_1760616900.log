@@ -1,0 +1,6 @@
+2025-10-16: Starting tmux in a new session
+2025-10-16: Closing terminal
+2025-10-16: Starting tmux
+2025-10-17: Closing terminal
+2025-10-17: Starting tmux
+Terminated                 alacritty -e tmux attach-session -t 2025-10-16_1760616900

@@ -1,0 +1,6 @@
+2024-10-25: Starting tmux in a new session
+XIO:  fatal IO error 11 (Resource temporarily unavailable) on X server ":1"
+      after 127090 requests (127090 known processed) with 0 events remaining.
+Terminated
+2024-10-29: Error: exited with non-zero status
+2024-10-29: Closing terminal

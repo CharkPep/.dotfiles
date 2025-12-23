@@ -1,0 +1,4 @@
+2025-08-21: Starting tmux in a new session
+Terminated                 alacritty -e tmux new -s 2025-08-21_1755724089
+2025-08-21: Error: exited with non-zero status
+2025-08-21: Closing terminal

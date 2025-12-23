@@ -1,0 +1,9 @@
+2025-07-22: Starting tmux in a new session
+2025-07-23: Closing terminal
+2025-07-23: Starting tmux
+Io error: Connection reset by peer (os error 104)
+Io error: Connection reset by peer (os error 104)
+Io error: Connection reset by peer (os error 104)
+Error: ExitFailure(1)
+2025-07-23: Error: exited with non-zero status
+2025-07-23: Closing terminal

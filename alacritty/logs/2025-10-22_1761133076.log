@@ -1,0 +1,8 @@
+2025-10-22: Starting tmux in a new session
+2025-10-22: Closing terminal
+2025-10-23: Starting tmux
+2025-10-23: Closing terminal
+2025-10-23: Starting tmux
+Terminated                 alacritty -e tmux attach-session -t 2025-10-22_1761133076
+2025-10-24: Error: exited with non-zero status
+2025-10-24: Closing terminal
